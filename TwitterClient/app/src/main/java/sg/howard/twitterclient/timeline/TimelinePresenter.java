@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 public class TimelinePresenter implements TimelineContract.Presenter {
     TwitterApiClient client = null;
     TimelineContract.View mView;
-    int count=20;
+    static int count=30;
 
     public TimelinePresenter(@NonNull TimelineContract.View view, TwitterSession session){
         mView= view;
@@ -25,25 +25,6 @@ public class TimelinePresenter implements TimelineContract.Presenter {
 
     @Override
     public void start() {
-        mView.showLoading(true);
-        client.getStatusesService()
-                .homeTimeline(20, null, null, null, null, null, null)
-                .enqueue(new Callback<List<Tweet>>() {
-                    @Override
-                    public void success(Result<List<Tweet>> result) {
-                        mView.showLoading(false);
-                        mView.onGetStatusesSuccess(result.data);
-                    }
-
-                    @Override
-                    public void failure(TwitterException exception) {
-                        mView.showLoading(false);
-                        mView.showError(exception.getMessage());
-                    }
-                });
-    }
-    public void loadMore(){
-        count+=20;
         mView.showLoading(true);
         client.getStatusesService()
                 .homeTimeline(count, null, null, null, null, null, null)
@@ -61,4 +42,25 @@ public class TimelinePresenter implements TimelineContract.Presenter {
                     }
                 });
     }
+    public void loadMore(){
+        count=count+5;
+        mView.showLoading(true);
+        client.getStatusesService()
+                .homeTimeline(count, null, null, null, null, null, null)
+                .enqueue(new Callback<List<Tweet>>() {
+                    @Override
+                    public void success(Result<List<Tweet>> result) {
+                        mView.showLoading(false);
+                        mView.onGetStatusesSuccess(result.data);
+                    }
+
+                    @Override
+                    public void failure(TwitterException exception) {
+                        mView.showLoading(false);
+                        mView.showError(exception.getMessage());
+                    }
+                });
+
+    }
+
 }

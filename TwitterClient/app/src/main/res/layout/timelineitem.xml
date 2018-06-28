@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/txtTest"
 
@@ -24,10 +25,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="abc"
+            android:layout_marginEnd="16dp"
             android:autoLink="all"
             android:linksClickable="true"
+            android:text="abc"
             android:textColorLink="#2a00ff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -56,23 +57,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imgShare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/imgHeart"
             app:layout_constraintTop_toBottomOf="@+id/img"
             app:srcCompat="@drawable/share" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imgHeart"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="14dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
@@ -119,12 +120,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:text="1.1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView4"
-            app:layout_constraintHorizontal_bias="0.607"
             app:layout_constraintStart_toEndOf="@+id/imageView5"
             app:layout_constraintTop_toBottomOf="@+id/img" />
 
@@ -134,12 +132,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:text="1.2"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView3"
-            app:layout_constraintHorizontal_bias="0.928"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toBottomOf="@+id/img" />
 
@@ -149,12 +144,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:text="1.3"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/imgHeart"
             app:layout_constraintTop_toBottomOf="@+id/img" />
 
         <TextView
@@ -173,14 +166,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toTopOf="@+id/txtFavorite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtTest"
-            app:layout_constraintVertical_bias="0.177"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:layout_constraintVertical_bias="0.177" />
+            <!--app:srcCompat="@drawable/ic_launcher_background" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

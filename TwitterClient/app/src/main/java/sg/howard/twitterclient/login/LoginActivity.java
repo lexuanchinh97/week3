@@ -60,7 +60,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 presenter.saveResult(result);
                 Toast.makeText(getApplicationContext(), "Welcome " + result.data.getUserName(), Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void failure(TwitterException exception) {
                 Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();

@@ -4,6 +4,7 @@ package sg.howard.twitterclient.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
@@ -33,6 +35,7 @@ import sg.howard.twitterclient.model.PatternEditableBuilder;
 public class TimelineItemAdapter extends RecyclerView.Adapter<TimelineItemAdapter.ViewHolder> {
     List<Tweet> data;
     Context context;
+
     private int lastPosition = -1;
     public TimelineItemAdapter(Context ctx){
         data=new ArrayList<>();
@@ -41,6 +44,10 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<TimelineItemAdapte
 
     public void setData(List<Tweet> data) {
         this.data = data;
+        notifyDataSetChanged();
+    }
+    public void clearData() {
+        data.clear();
         notifyDataSetChanged();
     }
     @NonNull
@@ -71,10 +78,21 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<TimelineItemAdapte
             if(tweet.entities.media.size()>0){
                 Glide.with(context).load(tweet.entities.media.get(0).mediaUrl).into(holder.img);
             }
-          else Glide.with(context).load("https://pbs.twimg.com/profile_images/1011471649030299650/pwbTpkeu_400x400.jpg")
-            .into(holder.img);
+//          else Glide.with(context).load("https://pbs.twimg.com/profile_images/1011471649030299650/pwbTpkeu_400x400.jpg")
+//            .into(holder.img);
+            holder.imgHeart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
+                        holder.txtRetweetCount.setText(String.valueOf(tweet.retweetCount+1));
+                }
+            });
+            holder.imgShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
+                }
+            });
 
         }
         setAnimation(holder.itemView, position);
@@ -87,9 +105,11 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<TimelineItemAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtTest,txtName,txtIdName,txtFavorite,txtRetweetCount,txtDate;
-        ImageView imgProfile,img;
+        ImageView imgProfile,img,imgHeart,imgShare;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            imgShare=itemView.findViewById(R.id.imgShare);
+            imgHeart=itemView.findViewById(R.id.imgHeart);
             txtDate=itemView.findViewById(R.id.txtDate);
             txtRetweetCount=itemView.findViewById(R.id.txtRetweetCount);
             txtFavorite=itemView.findViewById(R.id.txtFavorite);
@@ -99,6 +119,7 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<TimelineItemAdapte
             imgProfile=itemView.findViewById(R.id.imgProfile);
             img=itemView.findViewById(R.id.img);
         }
+
     }
     public String getRelativeTimeAgo(String rawJsonDate) {
         String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
@@ -126,4 +147,5 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<TimelineItemAdapte
             lastPosition = position;
         }
     }
+
 }
