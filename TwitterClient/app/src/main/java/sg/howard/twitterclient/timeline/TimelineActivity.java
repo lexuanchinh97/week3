@@ -43,6 +43,7 @@ public class TimelineActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tablayout);
         addControl();
+        setUpIcon();
 //        rvTimeline = findViewById(R.id.rvTimeline);
 //        loader = findViewById(R.id.loader);
 //        fab = findViewById(R.id.fab);
@@ -65,7 +66,21 @@ public class TimelineActivity extends AppCompatActivity  {
 //                android.R.color.holo_red_light);
 
     }
-//    @Override
+
+    private void setUpIcon() {
+        int[] imageResId = {
+                R.drawable.ic_home,
+                R.drawable.ic_notifications_black_24dp,
+                R.drawable.ic_profile,
+                R.drawable.ic_message
+        };
+        for (int i = 0; i < imageResId.length; i++) {
+            tabLayout.getTabAt(i).setIcon(imageResId[i]);
+        }
+
+    }
+
+    //    @Override
 //    protected void onResume() {
 //        super.onResume();
 //        presenter.start();

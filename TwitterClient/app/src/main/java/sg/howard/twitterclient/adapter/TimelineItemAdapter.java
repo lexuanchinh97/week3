@@ -78,8 +78,8 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<TimelineItemAdapte
             if(tweet.entities.media.size()>0){
                 Glide.with(context).load(tweet.entities.media.get(0).mediaUrl).into(holder.img);
             }
-//          else Glide.with(context).load("https://pbs.twimg.com/profile_images/1011471649030299650/pwbTpkeu_400x400.jpg")
-//            .into(holder.img);
+            else Glide.with(context).load("https://pbs.twimg.com/profile_images/1011471649030299650/pwbTpkeu_400x400.jpg")
+              .into(holder.img);
             holder.imgHeart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
