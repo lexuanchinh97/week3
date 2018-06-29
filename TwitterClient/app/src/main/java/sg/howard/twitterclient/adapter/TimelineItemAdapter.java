@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.twitter.sdk.android.core.models.Tweet;
@@ -32,7 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import sg.howard.twitterclient.R;
 import sg.howard.twitterclient.model.PatternEditableBuilder;
 
-public class TimelineItemAdapter extends RecyclerView.Adapter<TimelineItemAdapter.ViewHolder> {
+public class TimelineItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<Tweet> data;
     Context context;
 
@@ -50,15 +51,98 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<TimelineItemAdapte
         data.clear();
         notifyDataSetChanged();
     }
+
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.timelineitem,parent,false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        RecyclerView.ViewHolder holder;
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+
+        switch (viewType){
+            case 1:
+                View viewImg = inflater.inflate(R.layout.timelineitem_image,parent,false);
+                holder = new ViewHolderImg(viewImg);
+                break;
+            case 2:
+                View viewNormal = inflater.inflate(R.layout.timelineitem,parent,false);
+                holder = new ViewHolderNormal(viewNormal);
+                break;
+            default:
+                View v = inflater.inflate(R.layout.timelineitem, parent, false);
+                holder = new ViewHolderNormal(v);
+                break;
+        }
+        return holder;
     }
+
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Tweet tweet=data.get(position);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        switch (holder.getItemViewType()){
+            case 1:
+                ViewHolderImg imgView = (ViewHolderImg) holder;
+                configureImg(imgView,position);
+                break;
+            case 2:
+                ViewHolderNormal normalView = (ViewHolderNormal) holder;
+                configureNormal(normalView,position);
+                break;
+            default:
+                ViewHolderImg v = (ViewHolderImg) holder;
+                configureImg(v,position);
+                break;
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        int numMedia = data.get(position).entities.media.size();
+        switch (numMedia){
+            case 0:
+                return 2;
+            case 1:
+                return 1;
+            default:
+                return 3;
+        }
+    }
+
+    private void configureNormal(ViewHolderNormal holder, int position) {
+                Tweet tweet=data.get(position);
+        if(tweet!=null){
+
+            holder.txtDate.setText(getRelativeTimeAgo(tweet.createdAt));
+            holder.txtRetweetCount.setText(String.valueOf(tweet.retweetCount));
+            holder.txtFavorite.setText(String.valueOf(tweet.favoriteCount));
+            holder.txtName.setText(tweet.user.name);
+            holder.txtTest.setText(tweet.text);
+            new PatternEditableBuilder().
+                    addPattern(Pattern.compile("\\@(\\w+)"),Color.BLUE).
+                    into(holder.txtTest);
+            new PatternEditableBuilder().
+                    addPattern(Pattern.compile("\\#(\\w+)"),Color.BLUE).
+                    into(holder.txtTest);
+            holder.txtIdName.setText("@"+tweet.user.screenName);
+            Glide.with(context).load(tweet.user.profileImageUrl).
+                    apply(RequestOptions.circleCropTransform()).into(holder.imgProfile);
+            holder.imgHeart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                        holder.txtRetweetCount.setText(String.valueOf(tweet.retweetCount+1));
+                }
+            });
+            holder.imgShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+            setAnimation(holder.itemView, position);
+        }
+    }
+
+    private void configureImg(ViewHolderImg holder, int position) {
+                Tweet tweet=data.get(position);
         if(tweet!=null){
 
             holder.txtDate.setText(getRelativeTimeAgo(tweet.createdAt));
@@ -76,10 +160,11 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<TimelineItemAdapte
             Glide.with(context).load(tweet.user.profileImageUrl).
                     apply(RequestOptions.circleCropTransform()).into(holder.imgProfile);
             if(tweet.entities.media.size()>0){
-                Glide.with(context).load(tweet.entities.media.get(0).mediaUrl).into(holder.img);
+                Glide.with(context)
+                        .load(tweet.entities.media.get(0).mediaUrlHttps).into(holder.img);
             }
-            else Glide.with(context).load("https://pbs.twimg.com/profile_images/1011471649030299650/pwbTpkeu_400x400.jpg")
-              .into(holder.img);
+//            else Glide.with(context).load("https://pbs.twimg.com/profile_images/1011471649030299650/pwbTpkeu_400x400.jpg")
+//              .into(holder.img);
             holder.imgHeart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -93,20 +178,20 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<TimelineItemAdapte
 
                 }
             });
+            setAnimation(holder.itemView, position);
 
         }
-        setAnimation(holder.itemView, position);
     }
+
     @Override
     public int getItemCount() {
-
-      return  data.size();
+        return data.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    private class ViewHolderImg extends RecyclerView.ViewHolder {
         TextView txtTest,txtName,txtIdName,txtFavorite,txtRetweetCount,txtDate;
         ImageView imgProfile,img,imgHeart,imgShare;
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolderImg(@NonNull View itemView) {
             super(itemView);
             imgShare=itemView.findViewById(R.id.imgShare);
             imgHeart=itemView.findViewById(R.id.imgHeart);
@@ -119,9 +204,25 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<TimelineItemAdapte
             imgProfile=itemView.findViewById(R.id.imgProfile);
             img=itemView.findViewById(R.id.img);
         }
-
     }
-    public String getRelativeTimeAgo(String rawJsonDate) {
+
+    private class ViewHolderNormal extends RecyclerView.ViewHolder {
+        TextView txtTest,txtName,txtIdName,txtFavorite,txtRetweetCount,txtDate;
+        ImageView imgProfile,imgHeart,imgShare;
+        public ViewHolderNormal(@NonNull View itemView) {
+            super(itemView);
+            imgShare=itemView.findViewById(R.id.imgShare);
+            imgHeart=itemView.findViewById(R.id.imgHeart);
+            txtDate=itemView.findViewById(R.id.txtDate);
+            txtRetweetCount=itemView.findViewById(R.id.txtRetweetCount);
+            txtFavorite=itemView.findViewById(R.id.txtFavorite);
+            txtIdName=itemView.findViewById(R.id.txtIdName);
+            txtTest=itemView.findViewById(R.id.txtTest);
+            txtName=itemView.findViewById(R.id.txtName);
+            imgProfile=itemView.findViewById(R.id.imgProfile);
+        }
+    }
+        public String getRelativeTimeAgo(String rawJsonDate) {
         String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
         SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
         sf.setLenient(true);
@@ -137,6 +238,110 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<TimelineItemAdapte
 
         return relativeDate;
     }
+//    @NonNull
+//    @Override
+//    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        RecyclerView.ViewHolder holder;
+//        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+//
+//        switch (viewType){
+//            case 1:
+//                View viewImg = inflater.inflate(R.layout.timelineitem_image,parent,false);
+//                holder = new ViewHolderImg(viewImg);
+//                break;
+//            case 2:
+//                View viewNormal = inflater.inflate(R.layout.timeline_item,parent,false);
+//                holder = new ViewHolderNormal(viewNormal);
+//                break;
+//            default:
+//                View viewDefault = inflater.inflate(R.layout.timeline_item_with_imgs_alots,parent,false);
+//                holder = new ViewHolderImgsAlot(viewDefault);
+//                break;
+//        }
+//        return holder;
+//    }
+//    @Override
+//    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+//        Tweet tweet=data.get(position);
+//        if(tweet!=null){
+//
+//            holder.txtDate.setText(getRelativeTimeAgo(tweet.createdAt));
+//            holder.txtRetweetCount.setText(String.valueOf(tweet.retweetCount));
+//            holder.txtFavorite.setText(String.valueOf(tweet.favoriteCount));
+//            holder.txtName.setText(tweet.user.name);
+//            holder.txtTest.setText(tweet.text);
+//            new PatternEditableBuilder().
+//                    addPattern(Pattern.compile("\\@(\\w+)"),Color.BLUE).
+//                    into(holder.txtTest);
+//            new PatternEditableBuilder().
+//                    addPattern(Pattern.compile("\\#(\\w+)"),Color.BLUE).
+//                    into(holder.txtTest);
+//            holder.txtIdName.setText("@"+tweet.user.screenName);
+//            Glide.with(context).load(tweet.user.profileImageUrl).
+//                    apply(RequestOptions.circleCropTransform()).into(holder.imgProfile);
+//            if(tweet.entities.media.size()>0){
+//                Glide.with(context)
+//                        .load(tweet.entities.media.get(0).mediaUrlHttps).into(holder.img);
+//            }
+////            else Glide.with(context).load("https://pbs.twimg.com/profile_images/1011471649030299650/pwbTpkeu_400x400.jpg")
+////              .into(holder.img);
+//            holder.imgHeart.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//                        holder.txtRetweetCount.setText(String.valueOf(tweet.retweetCount+1));
+//                }
+//            });
+//            holder.imgShare.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//                }
+//            });
+//
+//        }
+//        setAnimation(holder.itemView, position);
+//    }
+//    @Override
+//    public int getItemCount() {
+//
+//      return  data.size();
+//    }
+//
+//    public class ViewHolder extends RecyclerView.ViewHolder {
+//        TextView txtTest,txtName,txtIdName,txtFavorite,txtRetweetCount,txtDate;
+//        ImageView imgProfile,img,imgHeart,imgShare;
+//        public ViewHolder(@NonNull View itemView) {
+//            super(itemView);
+//            imgShare=itemView.findViewById(R.id.imgShare);
+//            imgHeart=itemView.findViewById(R.id.imgHeart);
+//            txtDate=itemView.findViewById(R.id.txtDate);
+//            txtRetweetCount=itemView.findViewById(R.id.txtRetweetCount);
+//            txtFavorite=itemView.findViewById(R.id.txtFavorite);
+//            txtIdName=itemView.findViewById(R.id.txtIdName);
+//            txtTest=itemView.findViewById(R.id.txtTest);
+//            txtName=itemView.findViewById(R.id.txtName);
+//            imgProfile=itemView.findViewById(R.id.imgProfile);
+//            img=itemView.findViewById(R.id.img);
+//        }
+//
+//    }
+//    public String getRelativeTimeAgo(String rawJsonDate) {
+//        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+//        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+//        sf.setLenient(true);
+//
+//        String relativeDate = "";
+//        try {
+//            long dateMillis = sf.parse(rawJsonDate).getTime();
+//            relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
+//                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return relativeDate;
+//    }
     private void setAnimation(View viewToAnimate, int position)
     {
         // If the bound view wasn't previously displayed on screen, it's animated

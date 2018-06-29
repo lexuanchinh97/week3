@@ -17,7 +17,6 @@ import sg.howard.twitterclient.fragment.Fragment_Noti;
 import sg.howard.twitterclient.fragment.Fragment_Profile;
 
 public class PagerAdapter  extends FragmentStatePagerAdapter {
-    Context context;
     public PagerAdapter(FragmentManager fm) {
         super(fm);
     }
