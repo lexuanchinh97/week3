@@ -1,16 +1,9 @@
 package sg.howard.twitterclient.adapter;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import sg.howard.twitterclient.R;
 import sg.howard.twitterclient.fragment.FragmentTimeline;
 import sg.howard.twitterclient.fragment.Fragment_Messages;
 import sg.howard.twitterclient.fragment.Fragment_Noti;

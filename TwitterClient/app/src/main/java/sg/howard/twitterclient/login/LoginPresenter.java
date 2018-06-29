@@ -28,4 +28,9 @@ public class LoginPresenter implements LoginContract.Presenter {
     public void loadMore() {
 
     }
+
+    @Override
+    public void startUser() {
+
+    }
 }

@@ -52,4 +52,9 @@ public class ComposeTweetPresenter implements ComposeContract.Presenter {
     public void loadMore() {
 
     }
+
+    @Override
+    public void startUser() {
+
+    }
 }

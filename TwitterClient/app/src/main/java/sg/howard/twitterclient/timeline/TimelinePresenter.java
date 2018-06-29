@@ -14,15 +14,14 @@ import androidx.annotation.NonNull;
 public class TimelinePresenter implements TimelineContract.Presenter {
     TwitterApiClient client = null;
     TimelineContract.View mView;
-    static int count=30;
-
+    int count=20;
+    int countUser=10;
     public TimelinePresenter(@NonNull TimelineContract.View view, TwitterSession session){
         mView= view;
         mView.setPresenter(this);
         client = new TwitterApiClient(session);
 
     }
-
     @Override
     public void start() {
         mView.showLoading(true);
@@ -43,7 +42,7 @@ public class TimelinePresenter implements TimelineContract.Presenter {
                 });
     }
     public void loadMore(){
-        count=count+5;
+        count=count+10;
         mView.showLoading(true);
         client.getStatusesService()
                 .homeTimeline(count, null, null, null, null, null, null)
@@ -61,6 +60,27 @@ public class TimelinePresenter implements TimelineContract.Presenter {
                     }
                 });
 
+    }
+
+    @Override
+    public void startUser() {
+        countUser+=10;
+        mView.showLoading(true);
+        client.getStatusesService()
+                .userTimeline(null, null, countUser, null, null, null, null,null,null)
+                .enqueue(new Callback<List<Tweet>>() {
+                    @Override
+                    public void success(Result<List<Tweet>> result) {
+                        mView.showLoading(false);
+                        mView.onGetStatusesSuccess(result.data);
+                    }
+
+                    @Override
+                    public void failure(TwitterException exception) {
+                        mView.showLoading(false);
+                        mView.showError(exception.getMessage());
+                    }
+                });
     }
 
 }

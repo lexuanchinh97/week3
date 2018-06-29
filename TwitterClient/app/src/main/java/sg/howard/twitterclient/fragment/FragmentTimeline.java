@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import sg.howard.twitterclient.R;
 import sg.howard.twitterclient.adapter.TimelineItemAdapter;
-import sg.howard.twitterclient.compose.ComposeTweetActivity;
 import sg.howard.twitterclient.model.EndlessRecyclerViewScrollListener;
 import sg.howard.twitterclient.timeline.TimelineActivity;
 import sg.howard.twitterclient.timeline.TimelineContract;
@@ -59,7 +58,7 @@ public class FragmentTimeline extends Fragment implements TimelineContract.View 
         swipeContainer=v.findViewById(R.id.swipeContainer);
         presenter = new TimelinePresenter(this, TwitterCore.getInstance().getSessionManager().getActiveSession());
         fab.setOnClickListener(view -> {
-           startActivity(new Intent(getActivity(), ComposeTweetActivity.class));
+          // startActivity(new Intent(getActivity(), ComposeTweetActivity.class));
         });
         setUplistview();
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
