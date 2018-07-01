@@ -32,7 +32,7 @@ android {
             buildConfigField("String", "CONSUMER_KEY", '"9bwjoJrHWTUenhUI39ZiICTDx"')
             buildConfigField("String", "CONSUMER_SECRET", '"tqKzPjvyJu54spp7hmoPOXYr3W0E5fnAnYLkUKURZCYrjk1U6Z"')
         }
-        prod{
+        prod {
 
         }
     }
@@ -75,6 +75,5 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha1'
     implementation 'joda-time:joda-time:2.10'
-
-
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 }

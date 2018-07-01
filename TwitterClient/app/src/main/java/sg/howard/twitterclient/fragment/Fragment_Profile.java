@@ -34,13 +34,11 @@ public class Fragment_Profile extends Fragment implements TimelineContract.View{
     private static String TAG = TimelineActivity.class.getSimpleName();
     RecyclerView rvTimeline;
     ProgressBar loader;
-    FloatingActionButton fab;
     TimelineContract.Presenter presenter;
     TimelineItemAdapter adapter;
     EndlessRecyclerViewScrollListener scrollListener;
     SwipeRefreshLayout swipeContainer;
     LinearLayoutManager layoutManager;
-    ImageView imgBackground,imgUser;
     @Override
     public void onResume() {
         super.onResume();
@@ -55,12 +53,8 @@ public class Fragment_Profile extends Fragment implements TimelineContract.View{
         View v=inflater.inflate(R.layout.activity_profile,container,false);
         rvTimeline = v.findViewById(R.id.rvTimeline);
         loader = v.findViewById(R.id.loader);
-        fab = v.findViewById(R.id.fab);
         swipeContainer=v.findViewById(R.id.swipeContainer);
         presenter = new TimelinePresenter(this, TwitterCore.getInstance().getSessionManager().getActiveSession());
-        fab.setOnClickListener(view -> {
-          //  startActivity(new Intent(getActivity(), ComposeTweetActivity.class));
-        });
         setUplistview();
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

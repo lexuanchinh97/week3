@@ -1,6 +1,7 @@
 package sg.howard.twitterclient.adapter;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -27,6 +28,7 @@ import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import sg.howard.twitterclient.Image_Activity;
 import sg.howard.twitterclient.R;
 import sg.howard.twitterclient.model.PatternEditableBuilder;
 
@@ -119,8 +121,14 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     addPattern(Pattern.compile("\\#(\\w+)"),Color.BLUE).
                     into(holder.txtTest);
             holder.txtIdName.setText("@"+tweet.user.screenName);
+            //image profile
             Glide.with(context).load(tweet.user.profileImageUrl).
                     apply(RequestOptions.circleCropTransform()).into(holder.imgProfile);
+            holder.imgProfile.setOnClickListener(view -> {
+                Intent intent=new Intent(context,Image_Activity.class);
+                intent.putExtra("url",tweet.user.profileImageUrl);
+                context.startActivity(intent);
+            });
             holder.imgHeart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -160,9 +168,24 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             holder.txtIdName.setText("@"+tweet.user.screenName);
             Glide.with(context).load(tweet.user.profileImageUrl).
                     apply(RequestOptions.circleCropTransform()).into(holder.imgProfile);
+            holder.imgProfile.setOnClickListener(view -> {
+                Intent intent=new Intent(context,Image_Activity.class);
+                intent.putExtra("url",tweet.user.profileImageUrl);
+                context.startActivity(intent);
+            });
             if(tweet.entities.media.size()>0){
                 Glide.with(context)
                         .load(tweet.entities.media.get(0).mediaUrlHttps).into(holder.img);
+            }
+            if(tweet.entities.media.size()>0){
+                holder.img.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent=new Intent(context,Image_Activity.class);
+                        intent.putExtra("url",tweet.entities.media.get(0).mediaUrlHttps);
+                        context.startActivity(intent);
+                    }
+                });
             }
             holder.imgHeart.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -181,6 +204,7 @@ public class TimelineItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     context.startActivity(Intent.createChooser(sharingIntent, "Share using"));
                 }
             });
+
             setAnimation(holder.itemView, position);
 
         }

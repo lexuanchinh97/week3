@@ -25,7 +25,8 @@
             android:linksClickable="true"
             android:text="abc"
             android:textSize="16dp"
-            android:textColorLink="#2a00ff"
+            android:textColorLink="#000dff"
+            android:textColor="#060606"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +49,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="Lê Xuân Chính"
+            android:textColor="#000000"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imgProfile"
             app:layout_constraintTop_toTopOf="parent" />
@@ -152,6 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
+            android:textColor="#66000000"
             android:text="2018"
             app:layout_constraintStart_toEndOf="@+id/txtIdName"
             app:layout_constraintTop_toTopOf="parent" />

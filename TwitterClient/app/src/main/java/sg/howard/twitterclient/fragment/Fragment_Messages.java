@@ -36,6 +36,8 @@ public class Fragment_Messages extends Fragment implements ComposeContract.View 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v=inflater.inflate(R.layout.fragment_messages,container,false);
+       // String strtext=getArguments().getString("message");
+      //  Toast.makeText(getActivity(), strtext, Toast.LENGTH_SHORT).show();
         btnSend = v.findViewById(R.id.btnSend);
         edtCompose = v.findViewById(R.id.edtCompose);
         loader = v.findViewById(R.id.loader);

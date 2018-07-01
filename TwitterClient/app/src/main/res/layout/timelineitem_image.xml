@@ -24,6 +24,7 @@
             android:autoLink="all"
             android:linksClickable="true"
             android:text="abc"
+            android:textColor="#000000"
             android:textSize="16dp"
             android:textColorLink="#2a00ff"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +49,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="Lê Xuân Chính"
+            android:textColor="#000000"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imgProfile"
             app:layout_constraintTop_toTopOf="parent" />
@@ -107,6 +109,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="lexuanchinh"
+            android:textColor="#66000000"
             app:layout_constraintStart_toEndOf="@+id/txtName"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -152,12 +155,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
+            android:textColor="#66000000"
             android:text="2018"
             app:layout_constraintStart_toEndOf="@+id/txtIdName"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/img"
+            app:riv_corner_radius="10dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"

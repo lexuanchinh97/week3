@@ -43,28 +43,22 @@ public class PagerAdapter  extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-//        String title = "";
-//        switch (position){
-//            case 0:
-//                title = "Home";
-//                break;
-//            case 1:
-//                title = "Profile";
-//                break;
-//            case 2:
-//                title = "Notifications";
-//                break;
-//            case 3:
-//                title="Messages";
-//                break;
-//        }
-        return null;
-//        Drawable image = context.getResources().getDrawable(imageResId[position]);
-//        image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
-//        SpannableString sb = new SpannableString(" ");
-//        ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
-//        sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        return sb;
+        String title = "";
+        switch (position){
+            case 0:
+                title = "Home";
+                break;
+            case 1:
+                title = "Notifications";
+                break;
+            case 2:
+                title = "User";
+                break;
+            case 3:
+                title="Messages";
+                break;
+        }
+        return title;
     }
 
 

@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Users/Le%20Xuan%20Chinh/Downloads/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/editor/ic_insert_comment_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Users/Le%20Xuan%20Chinh/Downloads/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/hardware/ic_keyboard_backspace_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="d8e5e3" />
-                            <entry key="outputName" value="ic_insert_comment" />
+                            <entry key="color" value="4f45f9" />
+                            <entry key="outputName" value="ic_back" />
                             <entry key="sourceFile" value="C:\Users\Le Xuan Chinh" />
                           </map>
                         </option>

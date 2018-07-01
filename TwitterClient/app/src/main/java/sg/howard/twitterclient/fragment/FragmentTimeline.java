@@ -1,6 +1,6 @@
 package sg.howard.twitterclient.fragment;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.models.Tweet;
 
@@ -32,7 +31,6 @@ public class FragmentTimeline extends Fragment implements TimelineContract.View 
     private static String TAG = TimelineActivity.class.getSimpleName();
     RecyclerView rvTimeline;
     ProgressBar loader;
-    FloatingActionButton fab;
     TimelineContract.Presenter presenter;
     TimelineItemAdapter adapter;
     EndlessRecyclerViewScrollListener scrollListener;
@@ -54,12 +52,8 @@ public class FragmentTimeline extends Fragment implements TimelineContract.View 
 
         rvTimeline = v.findViewById(R.id.rvTimeline);
         loader = v.findViewById(R.id.loader);
-        fab = v.findViewById(R.id.fab);
         swipeContainer=v.findViewById(R.id.swipeContainer);
         presenter = new TimelinePresenter(this, TwitterCore.getInstance().getSessionManager().getActiveSession());
-        fab.setOnClickListener(view -> {
-          // startActivity(new Intent(getActivity(), ComposeTweetActivity.class));
-        });
         setUplistview();
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
