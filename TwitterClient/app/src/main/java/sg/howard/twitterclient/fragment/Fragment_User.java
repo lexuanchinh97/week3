@@ -1,16 +1,13 @@
 package sg.howard.twitterclient.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.models.Tweet;
 
@@ -24,13 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import sg.howard.twitterclient.R;
 import sg.howard.twitterclient.adapter.TimelineItemAdapter;
-import sg.howard.twitterclient.compose.ComposeTweetActivity;
 import sg.howard.twitterclient.model.EndlessRecyclerViewScrollListener;
 import sg.howard.twitterclient.timeline.TimelineActivity;
 import sg.howard.twitterclient.timeline.TimelineContract;
 import sg.howard.twitterclient.timeline.TimelinePresenter;
 
-public class Fragment_Profile extends Fragment implements TimelineContract.View{
+public class Fragment_User extends Fragment implements TimelineContract.View{
     private static String TAG = TimelineActivity.class.getSimpleName();
     RecyclerView rvTimeline;
     ProgressBar loader;
@@ -44,13 +40,13 @@ public class Fragment_Profile extends Fragment implements TimelineContract.View{
         super.onResume();
         presenter.startUser();
     }
-    public Fragment_Profile() {
+    public Fragment_User() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.activity_profile,container,false);
+        View v=inflater.inflate(R.layout.fragment_user,container,false);
         rvTimeline = v.findViewById(R.id.rvTimeline);
         loader = v.findViewById(R.id.loader);
         swipeContainer=v.findViewById(R.id.swipeContainer);

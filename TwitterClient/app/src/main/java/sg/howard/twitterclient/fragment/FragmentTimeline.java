@@ -48,7 +48,7 @@ public class FragmentTimeline extends Fragment implements TimelineContract.View 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.activity_timeline,container,false);
+        View v=inflater.inflate(R.layout.fragment_timeline,container,false);
 
         rvTimeline = v.findViewById(R.id.rvTimeline);
         loader = v.findViewById(R.id.loader);

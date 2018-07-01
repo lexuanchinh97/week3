@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import sg.howard.twitterclient.fragment.FragmentTimeline;
+import sg.howard.twitterclient.fragment.Fragment_Frofile;
 import sg.howard.twitterclient.fragment.Fragment_Messages;
-import sg.howard.twitterclient.fragment.Fragment_Noti;
-import sg.howard.twitterclient.fragment.Fragment_Profile;
+import sg.howard.twitterclient.fragment.Fragment_User;
 
 public class PagerAdapter  extends FragmentStatePagerAdapter {
     public PagerAdapter(FragmentManager fm) {
@@ -22,13 +22,15 @@ public class PagerAdapter  extends FragmentStatePagerAdapter {
                     fragment=new FragmentTimeline();
                     break;
                 case 1:
-                    fragment=new Fragment_Noti();
+                    fragment=new Fragment_User();
                     break;
                 case 2:
-                    fragment=new Fragment_Profile();
+                    fragment=new Fragment_Messages();
                 break;
                 case 3:
-                    fragment=new Fragment_Messages();
+
+                    fragment=new Fragment_Frofile()
+                    ;
                 break;
 
             }
@@ -49,13 +51,13 @@ public class PagerAdapter  extends FragmentStatePagerAdapter {
                 title = "Home";
                 break;
             case 1:
-                title = "Notifications";
-                break;
-            case 2:
                 title = "User";
                 break;
+            case 2:
+                title = "Compose";
+                break;
             case 3:
-                title="Messages";
+                title="Profile";
                 break;
         }
         return title;
