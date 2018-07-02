@@ -1,13 +1,12 @@
-package sg.howard.twitterclient.fragment;
+package sg.howard.twitterclient.compose;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -22,12 +21,12 @@ import sg.howard.twitterclient.R;
 import sg.howard.twitterclient.compose.ComposeContract;
 import sg.howard.twitterclient.compose.ComposeTweetPresenter;
 
-public class Fragment_Messages extends Fragment implements ComposeContract.View {
+public class Fragment_Compose extends Fragment implements ComposeContract.View {
     Button btnSend;
     EditText edtCompose;
     ProgressBar loader;
     ComposeContract.Presenter presenter;
-    public Fragment_Messages() {
+    public Fragment_Compose() {
     }
 
     @Nullable
@@ -35,9 +34,7 @@ public class Fragment_Messages extends Fragment implements ComposeContract.View 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v=inflater.inflate(R.layout.fragment_messages,container,false);
-       // String strtext=getArguments().getString("message");
-      //  Toast.makeText(getActivity(), strtext, Toast.LENGTH_SHORT).show();
+        View v=inflater.inflate(R.layout.fragment_compose,container,false);
         btnSend = v.findViewById(R.id.btnSend);
         edtCompose = v.findViewById(R.id.edtCompose);
         loader = v.findViewById(R.id.loader);

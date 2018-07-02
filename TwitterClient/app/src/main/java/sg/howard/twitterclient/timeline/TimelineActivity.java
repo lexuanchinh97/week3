@@ -24,7 +24,7 @@ import androidx.viewpager.widget.ViewPager;
 import sg.howard.twitterclient.R;
 import sg.howard.twitterclient.adapter.PagerAdapter;
 import sg.howard.twitterclient.adapter.TimelineItemAdapter;
-import sg.howard.twitterclient.compose.ComposeTweetActivity;
+//import sg.howard.twitterclient.compose.ComposeTweetActivity;
 import sg.howard.twitterclient.model.EndlessRecyclerViewScrollListener;
 
 public class TimelineActivity extends AppCompatActivity  {

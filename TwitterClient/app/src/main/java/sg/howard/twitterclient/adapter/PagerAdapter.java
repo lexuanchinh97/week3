@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import sg.howard.twitterclient.fragment.FragmentTimeline;
+import sg.howard.twitterclient.compose.Fragment_Compose;
 import sg.howard.twitterclient.fragment.Fragment_Frofile;
-import sg.howard.twitterclient.fragment.Fragment_Messages;
 import sg.howard.twitterclient.fragment.Fragment_User;
 
 public class PagerAdapter  extends FragmentStatePagerAdapter {
@@ -25,7 +25,7 @@ public class PagerAdapter  extends FragmentStatePagerAdapter {
                     fragment=new Fragment_User();
                     break;
                 case 2:
-                    fragment=new Fragment_Messages();
+                    fragment=new Fragment_Compose();
                 break;
                 case 3:
 

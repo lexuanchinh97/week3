@@ -1,6 +1,5 @@
 package sg.howard.twitterclient.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
