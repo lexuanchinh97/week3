@@ -42,6 +42,8 @@ The following **bonus** features are implemented:
 
 * [x] Use the [ConstraintLayout](https://developer.android.com/reference/android/support/constraint/ConstraintLayout) to display layout.
 * [x] Using animation for UI.
+* [x] Use Coordinatorlayout
+* [x] Use Tablayout, Viewpager
 
 ## Video Walkthrough
 
