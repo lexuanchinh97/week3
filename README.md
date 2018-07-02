@@ -47,9 +47,9 @@ The following **bonus** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='' title='Twitter Client' width='' alt='Video Walkthrough' />
+<img src='https://imgur.com/QjSs0Kv.gif' title='Twitter Client' width='' alt='Video Walkthrough' />
 
-Link to watch: 
+Link to watch: https://imgur.com/QjSs0Kv
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
